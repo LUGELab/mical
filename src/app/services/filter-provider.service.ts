@@ -16,18 +16,18 @@ class GeoFilter implements Filter {
     let north = this.bnds.getNorth();
     let south = this.bnds.getSouth();
     let arr = [];
-    if (east - west >= 360) {
+    if (Math.abs(east - west) >= 360) {
       arr =  [[north, -180], [south, -180 ], [south, 180], [north, 180]];
     } else {
       // check if east goes around 
-      if (east > 180) {
+      if (west < -180) {
         // TODO: vpineda AE-45
-        arr =  [[north, 180], [south, 180], [south, west], [north, west]];
-      } else if (west < -180) {
+        arr =  [[north, -180], [south, -180], [south, east], [north, east]];
+      } else if (east > 180) {
         // TODO: vpineda AE-45
-        arr =  [[north, east], [south, east], [south, -180], [north, -180]];
+        arr =  [[north, west], [south, west], [south, 180], [north, 180]];
       } else {
-        arr =  [[north, east], [south, east], [south, west], [north, west]];
+        arr =  [[north, west], [south, west], [south, east], [north, east]];
       }
     }
     return arr.map((loc) => {
