@@ -4,7 +4,6 @@ import {ColorProviderService} from '../../services/color-provider.service';
 import { DataProviderService } from 'src/app/services/data-provider.service';
 import {map} from 'rxjs/operators';
 import {RowData} from '../../model/datatypes';
-import {ChartDataSets} from 'chart.js';
 import {Observable} from 'rxjs';
 
 
@@ -46,7 +45,7 @@ export class GraphicsHolderComponent implements OnInit {
         datasetsData[row.studyID][1].push(Math.round(row.effectSize * 10).toString());
       });
 
-      let ds = Object.keys(datasetsData).reduce((acc: ChartDataSets[], next) => {
+      let ds = Object.keys(datasetsData).reduce((acc: any[], next) => {
         acc.push({
           label: next,
           backgroundColor: this.colorProvider.getColoursFillStartingAtIndex(0, rows.length),
